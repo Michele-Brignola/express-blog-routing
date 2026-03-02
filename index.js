@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const urlPort = "http://localhost:" + port;
-console.log("url " + urlPort);
 
 // imports
 const postsRouter = require("./routers/posts");
@@ -24,4 +23,5 @@ app.use("/posts", postsRouter);
 // Avvio Server
 app.listen(port, () => {
   console.log("Server avviato");
+  console.log("url " + urlPort);
 });
