@@ -1,30 +1,25 @@
 const express = require("express");
-const posts = require("./data/postsData");
-
 const app = express();
 const port = 3000;
 const urlPort = "http://localhost:" + port;
 console.log("url " + urlPort);
 
+// imports
+const postsRouter = require("./routers/posts");
+
+// middlewares
 app.use(express.static("./public"));
 
-// Rotta /
+// Rotte
 app.get("/", (req, res) => {
   const responseData = {
     message: "Server del mio blog",
     success: true,
   };
-  res.status(200).json(responseData);
+  res.json(responseData);
 });
 
-// Rotta /bacheca
-app.get("/bacheca", (req, res) => {
-  const responseData = {
-    posts: posts,
-    success: true,
-  };
-  res.status(200).json(responseData);
-});
+app.use("/posts", postsRouter);
 
 // Avvio Server
 app.listen(port, () => {
